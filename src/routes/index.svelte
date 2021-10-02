@@ -14,10 +14,17 @@
 				{
 					type: 'component',
 					componentType: 'Test',
+					componentState: {
+						extraClass: 'bold',
+						name: 'foo',
+					}
 				},
 				{
 					type: 'component',
 					componentType: 'Test',
+					componentState: {
+						name: 'bar',
+					}
 				},
 			],
 		},
@@ -35,5 +42,9 @@
 
 		margin: 150px auto;
 		border: 1px solid black;
+	}
+
+	:global(.bold) {
+		font-weight: bold;
 	}
 </style>
