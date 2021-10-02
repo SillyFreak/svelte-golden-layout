@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { SvelteComponent } from 'svelte';
 
+	import type { ComponentContainer, ResolvedComponentItemConfig } from 'golden-layout';
 	import { GoldenLayout, LayoutConfig } from 'golden-layout';
 
 	import './css/goldenlayout-base.css';
@@ -19,9 +20,9 @@
 	}
 
 	function initRoot(root: HTMLDivElement) {
-		goldenLayout = new GoldenLayout(root);
+		const components = new Map<ComponentContainer, SvelteComponent>();
 
-		goldenLayout.getComponentEvent = (container, itemConfig) => {
+		function bindComponentEvent(container: ComponentContainer, itemConfig: ResolvedComponentItemConfig): ComponentContainer.BindableComponent {
 			const { componentType, componentState } = itemConfig;
 			if (typeof componentType !== 'string') throw new Error('Invalid component type.');
 
@@ -38,13 +39,27 @@
 				props,
 			});
 
-			return () => {
-				node.$destroy();
-			};
-		};
+			components.set(container, node);
 
-		goldenLayout.releaseComponentEvent = (_container, cleanup) => {
-			(cleanup as () => void)();
+			return {
+				component: node,
+				virtual: false,
+			};
+		}
+
+		function unbindComponentEvent(container: ComponentContainer) {
+			const node = components.get(container);
+			components.delete(container);
+			node.$destroy();
+		}
+
+		goldenLayout = new GoldenLayout(root, bindComponentEvent, unbindComponentEvent);
+
+		return {
+			destroy() {
+				goldenLayout.destroy();
+				goldenLayout = undefined;
+			}
 		};
 	}
 
