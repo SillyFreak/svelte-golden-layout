@@ -22,7 +22,10 @@
 	function initRoot(root: HTMLDivElement) {
 		const components = new Map<ComponentContainer, SvelteComponent>();
 
-		function bindComponentEvent(container: ComponentContainer, itemConfig: ResolvedComponentItemConfig): ComponentContainer.BindableComponent {
+		function bindComponentEvent(
+			container: ComponentContainer,
+			itemConfig: ResolvedComponentItemConfig,
+		): ComponentContainer.BindableComponent {
 			const { componentType, componentState } = itemConfig;
 			if (typeof componentType !== 'string') throw new Error('Invalid component type.');
 
@@ -59,7 +62,7 @@
 			destroy() {
 				goldenLayout.destroy();
 				goldenLayout = undefined;
-			}
+			},
 		};
 	}
 

@@ -17,14 +17,14 @@
 					componentState: {
 						extraClass: 'bold',
 						name: 'foo',
-					}
+					},
 				},
 				{
 					type: 'component',
 					componentType: 'Test',
 					componentState: {
 						name: 'bar',
-					}
+					},
 				},
 			],
 		},
