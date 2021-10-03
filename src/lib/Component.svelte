@@ -60,6 +60,9 @@
 
 		return {
 			destroy() {
+				for (const node of components.values()) {
+					node.$destroy();
+				}
 				goldenLayout.destroy();
 				goldenLayout = undefined;
 			},
