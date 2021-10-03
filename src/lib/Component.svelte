@@ -73,7 +73,6 @@
 		if (config) {
 			// TODO goldenLayout is now reloaded whenever the config changes,
 			// not only when the component is first loaded.
-			// does that hurt in any particular scenario?
 			goldenLayout?.loadLayout(config);
 		}
 	}
