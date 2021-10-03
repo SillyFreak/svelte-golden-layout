@@ -5,42 +5,58 @@
 	import GoldenLayout from '../lib';
 	import Test from '../test/Test.svelte';
 
-	const components = { Test };
+	let display = true;
+	let columns = 2;
 
-	const layout: LayoutConfig = {
+	const components = { Test };
+	const names = ['foo', 'bar', 'baz'];
+
+	let layout: LayoutConfig;
+
+	$: layout = {
 		root: {
 			type: 'row',
-			content: [
-				{
+			content: Array.from({ length: columns }, (_, i) => {
+				const componentState: any = {};
+				componentState.name = names[i % names.length];
+				if (i == 0) componentState.extraClass = 'bold';
+
+				return {
 					type: 'component',
 					componentType: 'Test',
-					componentState: {
-						extraClass: 'bold',
-						name: 'foo',
-					},
-				},
-				{
-					type: 'component',
-					componentType: 'Test',
-					componentState: {
-						name: 'bar',
-					},
-				},
-			],
+					componentState,
+				};
+			}),
 		},
 	};
 </script>
 
-<div class="layout-container">
-	<GoldenLayout {components} config={layout} />
-</div>
+<main>
+	<p>
+		<input type="checkbox" bind:checked={display} /> display
+		<input type="number" min="0" max="10" bind:value={columns} /> columns
+	</p>
+	<div class="layout-container">
+		{#if display}
+			<GoldenLayout {components} config={layout} />
+		{/if}
+	</div>
+</main>
 
 <style>
+	main {
+		width: 800px;
+		margin: 150px auto;
+	}
+
+	input[type='number'] {
+		width: 3.5em;
+	}
+
 	.layout-container {
 		width: 800px;
 		height: 600px;
 
-		margin: 150px auto;
 		border: 1px solid black;
 	}
 
