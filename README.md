@@ -14,8 +14,10 @@ This was extracted from a personal project, so its initial scope was rather limi
 **Known limitations**
 
 - changing the layout recreates the whole thing, i.e. new components are created for each tab
-	- this includes props, as props are given within the layout JSON
+  - this includes props, as props are given within the layout JSON
 - components are not destroyed when tabs are closed or the layout is recreated (this might be an upstream GoldenLayout bug)
+- dragging the tabset dividers results in text selection (might also be upstream)
+- base and theme CSS is bundled, but image assets have to be added as static resources (see [static/img](static/img), in this repo for the example app)
 
 This means that right now, the `config` prop should better not be changed after the fact, and that there is a lifecycle problem and memory leak of individual tabs. It's a starting point!
 
@@ -39,52 +41,52 @@ npm i ../svelte-golden-layout/package
 
 ```svelte
 <script lang="ts">
-	import type { LayoutConfig } from 'golden-layout';
-	import 'svelte-golden-layout/css/themes/goldenlayout-light-theme.css';
+  import type { LayoutConfig } from 'golden-layout';
+  import 'svelte-golden-layout/css/themes/goldenlayout-light-theme.css';
 
-	import GoldenLayout from 'svelte-golden-layout';
-	// ... import a Test component
+  import GoldenLayout from 'svelte-golden-layout';
+  // ... import a Test component
 
-	const components = { Test };
+  const components = { Test };
 
-	const layout: LayoutConfig = {
-		root: {
-			type: 'row',
-			content: [
-				{
-					type: 'component',
-					componentType: 'Test',
-					componentState: {
-						extraClass = 'bold',
-						someProp = 1,
-						anotherProp = 1,
-					}
-				},
-				{
-					type: 'component',
-					componentType: 'Test',
-				},
-			],
-		},
-	};
+  const layout: LayoutConfig = {
+    root: {
+      type: 'row',
+      content: [
+        {
+          type: 'component',
+          componentType: 'Test',
+          componentState: {
+            extraClass = 'bold',
+            someProp = 1,
+            anotherProp = 1,
+          }
+        },
+        {
+          type: 'component',
+          componentType: 'Test',
+        },
+      ],
+    },
+  };
 </script>
 
 <div class="layout-container">
-	<GoldenLayout {components} config={layout} />
+  <GoldenLayout {components} config={layout} />
 </div>
 
 <style>
-	.layout-container {
-		width: 800px;
-		height: 600px;
+  .layout-container {
+    width: 800px;
+    height: 600px;
 
-		margin: 150px auto;
-		border: 1px solid black;
-	}
+    margin: 150px auto;
+    border: 1px solid black;
+  }
 
-	:global(.bold) {
-		font-weight: bold;
-	}
+  :global(.bold) {
+    font-weight: bold;
+  }
 </style>
 ```
 
