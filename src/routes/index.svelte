@@ -17,14 +17,12 @@
 		root: {
 			type: 'row',
 			content: Array.from({ length: columns }, (_, i) => {
-				const componentState: any = {};
-				componentState.name = names[i % names.length];
-				if (i == 0) componentState.extraClass = 'bold';
-
 				return {
 					type: 'component',
 					componentType: 'Test',
-					componentState,
+					componentState: {
+						name: names[i % names.length],
+					},
 				};
 			}),
 		},

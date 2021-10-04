@@ -8,18 +8,16 @@ This was extracted from a personal project, so its initial scope was rather limi
 
 - pass component types (`components`) and layout (`config`) via props
 - pass props to components in the layout
-- pass a CSS class to the container element of a component
 - automatic resizing of the layout within its containing HTML element
 
 **Known limitations**
 
 - changing the layout recreates the whole thing, i.e. new components are created for each tab
   - this includes props, as props are given within the layout JSON
-- components are not destroyed when tabs are closed or the layout is recreated (this might be an upstream GoldenLayout bug)
-- dragging the tabset dividers results in text selection (might also be upstream)
+- dragging the tabset dividers results in text selection
 - base and theme CSS is bundled, but image assets have to be added as static resources (see [static/img](static/img), in this repo for the example app)
 
-This means that right now, the `config` prop should better not be changed after the fact, and that there is a lifecycle problem and memory leak of individual tabs. It's a starting point!
+This means that right now, the `config` prop should better not be changed after the fact. It's a starting point!
 
 ## Installation & development
 

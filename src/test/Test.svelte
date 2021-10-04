@@ -6,10 +6,10 @@
 	let greeting = 'Hello';
 
 	onMount(() => {
-		console.log("mount", name);
+		console.log('mount', name);
 
 		return () => {
-			console.log("unmount", name);
+			console.log('unmount', name);
 		};
 	});
 </script>
