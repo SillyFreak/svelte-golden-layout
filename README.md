@@ -1,19 +1,18 @@
 # svelte-golden-layout
 
-[GoldenLayout 2.x](https://github.com/golden-layout/golden-layout) Wrapper for Svelte. The `GoldenLayout` component accepts an object mapping names to `SvelteComponent` constructors, which are instantiated for every tab. The layout contains the component names, and any props to pass to the components.
+[GoldenLayout 2.x](https://github.com/golden-layout/golden-layout) Wrapper for Svelte. The `GoldenLayout` component accepts child content (i.e. a slot) that renders each tab.
 
 This was extracted from a personal project, so its initial scope was rather limited. Expect rough edges, but bug reports and contributions are welcome!
 
 **Features**
 
-- pass component types (`components`) and layout (`config`) via props
-- pass props to components in the layout
+- pass the layout (`config`) via props
+- render tab content via the default [slot](https://svelte.dev/docs#slot_let); `let:id`, `let:componentType`, and `let:componentState` contain the specific tab's content
 - automatic resizing of the layout within its containing HTML element
 
 **Known limitations**
 
 - changing the layout recreates the whole thing, i.e. new components are created for each tab
-  - this includes props, as props are given within the layout JSON
 - dragging the tabset dividers results in text selection
 - base and theme CSS is bundled, but image assets have to be added as static resources (see [static/img](static/img), in this repo for the example app)
 
@@ -37,6 +36,8 @@ npm i ../svelte-golden-layout/package
 
 ## simple example
 
+In this example, `svelte:component` is used to select a specific component for each tab, and the `componentState` object is passed as props to that component:
+
 ```svelte
 <script lang="ts">
   import type { LayoutConfig } from 'golden-layout';
@@ -55,7 +56,6 @@ npm i ../svelte-golden-layout/package
           type: 'component',
           componentType: 'Test',
           componentState: {
-            extraClass = 'bold',
             someProp = 1,
             anotherProp = 1,
           }
@@ -70,7 +70,9 @@ npm i ../svelte-golden-layout/package
 </script>
 
 <div class="layout-container">
-  <GoldenLayout {components} config={layout} />
+  <GoldenLayout config={layout} let:componentType let:componentState>
+    <svelte:component this={components[componentType]} {...componentState} />
+  </GoldenLayout>
 </div>
 
 <style>
@@ -80,10 +82,6 @@ npm i ../svelte-golden-layout/package
 
     margin: 150px auto;
     border: 1px solid black;
-  }
-
-  :global(.bold) {
-    font-weight: bold;
   }
 </style>
 ```
