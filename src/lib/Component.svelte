@@ -14,11 +14,9 @@
 	};
 	type ComponentConfig = {
 		key: ComponentContainer;
-		props: {
-			id: string;
-			componentType: string;
-			componentState?: JsonValue;
-		};
+		id: string;
+		componentType: string;
+		componentState?: JsonValue;
 		bounds: Bounds;
 		visible: boolean;
 		zIndex: string;
@@ -54,11 +52,9 @@
 
 		const component = {
 			key: container,
-			props: {
-				id,
-				componentType,
-				componentState,
-			},
+			id,
+			componentType,
+			componentState,
 			bounds: {
 				left: 0,
 				top: 0,
@@ -186,7 +182,11 @@
 <div class="root" bind:offsetWidth={width} bind:offsetHeight={height} use:initRoot>
 	{#each components as component (component.key)}
 		<div class="component-root" style={componentStyle(component)}>
-			<slot {...component.props} />
+			<slot
+				id={component.id}
+				componentType={component.componentType}
+				componentState={component.componentState}
+			/>
 		</div>
 	{/each}
 </div>
