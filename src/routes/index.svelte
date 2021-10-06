@@ -36,7 +36,9 @@
 	</p>
 	<div class="layout-container">
 		{#if display}
-			<GoldenLayout {components} config={layout} />
+			<GoldenLayout config={layout} let:componentType let:componentState>
+				<svelte:component this={components[componentType]} {...componentState} />
+			</GoldenLayout>
 		{/if}
 	</div>
 </main>

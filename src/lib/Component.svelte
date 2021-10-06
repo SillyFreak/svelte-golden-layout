@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { SvelteComponent } from 'svelte';
 
-	import type { ComponentContainer, LogicalZIndex } from 'golden-layout';
+	import type { ComponentContainer, JsonValue, LogicalZIndex } from 'golden-layout';
 	import { VirtualLayout, LayoutConfig, ResolvedComponentItemConfig } from 'golden-layout';
 
 	import './css/goldenlayout-base.css';
@@ -14,19 +14,21 @@
 	};
 	type ComponentConfig = {
 		key: ComponentContainer;
-		type: typeof SvelteComponent;
-		props: any;
+		props: {
+			id: string;
+			componentType: string;
+			componentState?: JsonValue;
+		};
 		bounds: Bounds;
 		visible: boolean;
 		zIndex: string;
 	};
 
-	export let components: Record<string, typeof SvelteComponent> = {};
 	export let config: LayoutConfig;
 
 	let goldenLayout: VirtualLayout | undefined;
 	let goldenLayoutBoundingClientRect: DOMRect | undefined;
-	let componentInstances: ComponentConfig[] = [];
+	let components: ComponentConfig[] = [];
 
 	let width: number, height: number;
 
@@ -46,23 +48,17 @@
 		container: ComponentContainer,
 		itemConfig: ResolvedComponentItemConfig,
 	) {
+		const { id, componentState } = itemConfig;
 		// Use ResolvedComponentItemConfig.resolveComponentTypeNamecan to resolve component types to a unique name
-		const componentTypeName = ResolvedComponentItemConfig.resolveComponentTypeName(itemConfig);
-		if (componentTypeName === undefined) {
-			throw new Error('handleBindComponentEvent: Undefined componentTypeName');
-		}
-
-		const componentType = components[componentTypeName];
-		if (componentType === undefined) {
-			throw new Error(
-				`handleBindComponentEvent: Unknown componentTypeName: '${componentTypeName}'`,
-			);
-		}
+		const componentType = ResolvedComponentItemConfig.resolveComponentTypeName(itemConfig);
 
 		const component = {
 			key: container,
-			type: componentType,
-			props: itemConfig.componentState,
+			props: {
+				id,
+				componentType,
+				componentState,
+			},
 			bounds: {
 				left: 0,
 				top: 0,
@@ -73,8 +69,8 @@
 			zIndex: '',
 		};
 
-		componentInstances.push(component);
-		componentInstances = componentInstances;
+		components.push(component);
+		components = components;
 
 		container.virtualRectingRequiredEvent = handleContainerVirtualRectingRequiredEvent;
 		container.virtualVisibilityChangeRequiredEvent = handleContainerVisibilityChangeRequiredEvent;
@@ -86,16 +82,16 @@
 	}
 
 	function handleUnbindComponentEvent(container: ComponentContainer) {
-		const index = componentInstances.findIndex((value) => value.key === container);
+		const index = components.findIndex((value) => value.key === container);
 
 		if (index === -1) {
 			throw new Error('handleUnbindComponentEvent: Component not found');
 		}
 
-		const component = componentInstances[index];
+		const component = components[index];
 
-		componentInstances.splice(index, 1);
-		componentInstances = componentInstances;
+		components.splice(index, 1);
+		components = components;
 	}
 
 	function handleContainerVirtualRectingRequiredEvent(
@@ -103,7 +99,7 @@
 		width: number,
 		height: number,
 	) {
-		const component = componentInstances.find((value) => value.key === container);
+		const component = components.find((value) => value.key === container);
 
 		if (component === undefined) {
 			throw new Error('handleContainerVirtualRectingRequiredEvent: Component not found');
@@ -114,21 +110,21 @@
 		const top = containerBoundingClientRect.top - goldenLayoutBoundingClientRect.top;
 
 		component.bounds = { left, top, width, height };
-		componentInstances = componentInstances;
+		components = components;
 	}
 
 	function handleContainerVisibilityChangeRequiredEvent(
 		container: ComponentContainer,
 		visible: boolean,
 	) {
-		const component = componentInstances.find((value) => value.key === container);
+		const component = components.find((value) => value.key === container);
 
 		if (component === undefined) {
 			throw new Error('handleContainerVisibilityChangeRequiredEvent: Component not found');
 		}
 
 		component.visible = visible;
-		componentInstances = componentInstances;
+		components = components;
 	}
 
 	function handleContainerVirtualZIndexChangeRequiredEvent(
@@ -136,14 +132,14 @@
 		logicalZIndex: LogicalZIndex,
 		defaultZIndex: string,
 	) {
-		const component = componentInstances.find((value) => value.key === container);
+		const component = components.find((value) => value.key === container);
 
 		if (component === undefined) {
 			throw new Error('handleContainerVirtualZIndexChangeRequiredEvent: Component not found');
 		}
 
 		component.zIndex = defaultZIndex;
-		componentInstances = componentInstances;
+		components = components;
 	}
 
 	function initRoot(root: HTMLDivElement) {
@@ -188,9 +184,9 @@
 <svelte:window on:resize={onResize} />
 
 <div class="root" bind:offsetWidth={width} bind:offsetHeight={height} use:initRoot>
-	{#each componentInstances as component (component.key)}
+	{#each components as component (component.key)}
 		<div class="component-root" style={componentStyle(component)}>
-			<svelte:component this={component.type} {...component.props} />
+			<slot {...component.props} />
 		</div>
 	{/each}
 </div>
