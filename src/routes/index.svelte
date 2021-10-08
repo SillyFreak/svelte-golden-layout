@@ -3,7 +3,7 @@
 	import '../lib/css/themes/goldenlayout-light-theme.css';
 
 	import GoldenLayout from '../lib';
-	import Test from '../test/Test.svelte';
+	import Test from './_Test.svelte';
 
 	let display = true;
 	let columns = 2;
