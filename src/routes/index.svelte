@@ -59,8 +59,4 @@
 
 		border: 1px solid black;
 	}
-
-	:global(.bold) {
-		font-weight: bold;
-	}
 </style>
