@@ -29,9 +29,9 @@ cd svelte-golden-layout
 npm i
 npm run package
 
-# add it to your own project
+# add it & golden-layout to your own project
 cd ../your-own-project
-npm i ../svelte-golden-layout/package
+npm i golden-layout ../svelte-golden-layout/package
 ```
 
 ## simple example
