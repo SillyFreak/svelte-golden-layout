@@ -179,22 +179,33 @@
 
 <svelte:window on:resize={onResize} />
 
-<div class="root" bind:offsetWidth={width} bind:offsetHeight={height} use:initRoot>
-	{#each components as component (component.key)}
-		<div class="component-root" style={componentStyle(component)}>
-			<slot
-				id={component.id}
-				componentType={component.componentType}
-				componentState={component.componentState}
-			/>
-		</div>
-	{/each}
+<div class="wrapper" bind:offsetWidth={width} bind:offsetHeight={height}>
+	<div class="root" use:initRoot>
+		{#each components as component (component.key)}
+			<div class="component-root" style={componentStyle(component)}>
+				<slot
+					id={component.id}
+					componentType={component.componentType}
+					componentState={component.componentState}
+				/>
+			</div>
+		{/each}
+	</div>
 </div>
 
 <style>
-	.root {
+	.wrapper {
+		position: relative;
 		width: 100%;
 		height: 100%;
+	}
+	
+	.root {
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
 	}
 
 	.component-root {
