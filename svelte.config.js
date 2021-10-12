@@ -12,6 +12,10 @@ const config = {
 
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
+		appDir: 'app',
+		paths: {
+			base: process.env.NODE_ENV === 'production' ? '/svelte-golden-layout' : '',
+		},
 	},
 };
 
