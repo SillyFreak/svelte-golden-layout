@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import type { Writable } from 'svelte/store';
 
 	export let name: string;
-
-	let greeting = 'Hello';
+	export let file: Writable<string>;
 
 	onMount(() => {
 		console.log('mount', name);
@@ -14,5 +14,4 @@
 	});
 </script>
 
-<p>Greeting: <input type="text" size="5" bind:value={greeting} /></p>
-<p>{greeting} {name}!</p>
+<p>{name}: <input type="text" bind:value={$file} /></p>

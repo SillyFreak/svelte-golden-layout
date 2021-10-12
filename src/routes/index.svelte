@@ -1,27 +1,44 @@
 <script lang="ts">
+	import { writable, Writable } from 'svelte/store';
+	import { propertyStore } from 'svelte-writable-derived';
+
 	import type { LayoutConfig } from 'golden-layout';
 	import '../lib/css/themes/goldenlayout-light-theme.css';
 
 	import GoldenLayout from '../lib';
 	import Test from './_Test.svelte';
 
+	const names = ['foo', 'bar', 'baz'];
+	const files = writable<{[name: string]: string}>({
+		'foo': '',
+		'bar': '',
+		'baz': '',
+	});
+
+	function fileStore(name: string): Writable<string> {
+		return propertyStore(files, name);
+	}
+
 	let display = true;
-	let columns = 2;
+	let rows = 4;
 
 	const components = { Test };
-	const names = ['foo', 'bar', 'baz'];
 
 	let layout: LayoutConfig;
 
 	$: layout = {
 		root: {
-			type: 'row',
-			content: Array.from({ length: columns }, (_, i) => {
+			type: 'column',
+			content: Array.from({ length: rows }, (_, i) => {
+				const name = names[i % names.length];
+
 				return {
 					type: 'component',
+					title: name,
 					componentType: 'Test',
 					componentState: {
-						name: names[i % names.length],
+						name,
+						file: propertyStore(files, name),
 					},
 				};
 			}),
@@ -34,8 +51,11 @@
 		<h1>Config</h1>
 		<p>
 			<input type="checkbox" bind:checked={display} /> display
-			<input type="number" min="0" max="10" bind:value={columns} /> columns
+			<input type="number" min="0" max="10" bind:value={rows} /> columns
 		</p>
+		{#each Object.entries($files) as [name, content]}
+			<p>{name}: {content}</p>
+		{/each}
 	</div>
 	<div>
 		<h1>Demo</h1>
