@@ -2,7 +2,7 @@
 	import { writable, Writable } from 'svelte/store';
 	import { propertyStore } from 'svelte-writable-derived';
 
-	import type { LayoutConfig } from 'golden-layout';
+	import type { LayoutConfig, ResolvedLayoutConfig, VirtualLayout } from 'golden-layout';
 	import '../lib/css/themes/goldenlayout-light-theme.css';
 
 	import GoldenLayout from '../lib';
@@ -25,6 +25,9 @@
 	const components = { Test };
 
 	let layout: LayoutConfig;
+	let saved: ResolvedLayoutConfig = undefined;
+
+	let goldenLayout: VirtualLayout;
 
 	$: layout = {
 		root: {
@@ -44,6 +47,14 @@
 			}),
 		},
 	};
+
+	function handleSave() {
+		saved = goldenLayout.saveLayout();
+	}
+
+	function handleRestore() {
+		layout = saved as unknown as LayoutConfig;
+	}
 </script>
 
 <main>
@@ -52,16 +63,24 @@
 		<p>
 			<input type="checkbox" bind:checked={display} /> display
 			<input type="number" min="0" max="10" bind:value={rows} /> columns
+			<button on:click={handleSave}>Save Layout</button>
+			<button on:click={handleRestore} disabled={saved === undefined}>Restore Layout</button>
 		</p>
 		{#each Object.entries($files) as [name, content]}
 			<p>{name}: {content}</p>
 		{/each}
+		<h2>Saved Layout</h2>
+		{#if saved !== undefined}
+			<pre>{JSON.stringify(saved, undefined, 2)}</pre>
+		{:else}
+			<p>(none)</p>
+		{/if}
 	</div>
 	<div>
 		<h1>Demo</h1>
 		<div class="layout-container">
 			{#if display}
-				<GoldenLayout config={layout} let:componentType let:componentState>
+				<GoldenLayout config={layout} bind:goldenLayout let:componentType let:componentState>
 					<svelte:component this={components[componentType]} {...componentState} />
 				</GoldenLayout>
 			{/if}

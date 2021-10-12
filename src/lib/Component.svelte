@@ -23,8 +23,8 @@
 	};
 
 	export let config: LayoutConfig;
+	export let goldenLayout: VirtualLayout = undefined;
 
-	let goldenLayout: VirtualLayout | undefined;
 	let goldenLayoutBoundingClientRect: DOMRect | undefined;
 	let components: ComponentConfig[] = [];
 
