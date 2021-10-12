@@ -86,4 +86,4 @@ In this example, `svelte:component` is used to select a specific component for e
 </style>
 ```
 
-You can also run this repo as an app; the example code is in [routes/index.svelte](src/routes/index.svelte) and [test/Test.svelte](src/test/Test.svelte), and demonstates both features and shortcomings of the library.
+You can also run this repo as an app; the example code is in [index.svelte](src/routes/index.svelte) and [_Test.svelte](src/routes/_Test.svelte), and demonstates both features and shortcomings of the library.
