@@ -9,10 +9,10 @@
 	import Test from './_Test.svelte';
 
 	const names = ['foo', 'bar', 'baz'];
-	const files = writable<{[name: string]: string}>({
-		'foo': '',
-		'bar': '',
-		'baz': '',
+	const files = writable<{ [name: string]: string }>({
+		foo: '',
+		bar: '',
+		baz: '',
 	});
 
 	function fileStore(name: string): Writable<string> {

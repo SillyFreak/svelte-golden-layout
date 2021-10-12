@@ -199,7 +199,7 @@
 		width: 100%;
 		height: 100%;
 	}
-	
+
 	.root {
 		position: absolute;
 		left: 0;
