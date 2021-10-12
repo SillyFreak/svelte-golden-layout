@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+
+		
+
+		<link rel="modulepreload" href="/svelte-golden-layout/app/start-c8d70ac4.js">
+		<link rel="modulepreload" href="/svelte-golden-layout/app/chunks/vendor-8ea4093b.js">
+		<link rel="modulepreload" href="/svelte-golden-layout/app/layout.svelte-da8c5cb2.js">
+		<link rel="modulepreload" href="/svelte-golden-layout/app/pages/index.svelte-c7b7acb4.js">
+		<link rel="stylesheet" href="/svelte-golden-layout/app/assets/start-61d1577b.css">
+		<link rel="stylesheet" href="/svelte-golden-layout/app/assets/pages/index.svelte-74808cc1.css">
+
+		<script type="module">
+			import { start } from "/svelte-golden-layout/app/start-c8d70ac4.js";
+			start({
+				target: document.querySelector("#svelte"),
+				paths: {"base":"/svelte-golden-layout","assets":""},
+				session: {},
+				host: location.host,
+				route: true,
+				spa: false,
+				trailing_slash: "never",
+				hydrate: {
+					status: 200,
+					error: null,
+					nodes: [
+						import("/svelte-golden-layout/app/layout.svelte-da8c5cb2.js"),
+						import("/svelte-golden-layout/app/pages/index.svelte-c7b7acb4.js")
+					],
+					page: {
+						host: location.host, // TODO this is redundant
+						path: "/",
+						query: new URLSearchParams(""),
+						params: {}
+					}
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<div id="svelte">
+
+
+<main class="svelte-1h3lhyo"><div class="svelte-1h3lhyo"><h1>Config</h1>
+		<p><input type="checkbox" checked> display
+			<input type="number" min="0" max="10" class="svelte-1h3lhyo" value="4"> columns
+			<button>Save Layout</button>
+			<button disabled>Restore Layout</button></p>
+		<p>foo: </p><p>bar: </p><p>baz: </p>
+		<h2>Saved Layout</h2>
+		<p>(none)</p></div>
+	<div class="svelte-1h3lhyo"><h1>Demo</h1>
+		<div class="layout-container svelte-1h3lhyo">
+
+<div class="wrapper svelte-tzoxf0"><div class="root svelte-tzoxf0"></div>
+</div></div></div>
+</main>
+
+
+
+			
+		</div>
+	</body>
+</html>
