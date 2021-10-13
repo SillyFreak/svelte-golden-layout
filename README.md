@@ -4,6 +4,8 @@
 
 This was extracted from a personal project, so its initial scope was rather limited. Expect rough edges, but bug reports and contributions are welcome!
 
+[**Live Demo**](https://sillyfreak.github.io/svelte-golden-layout/)
+
 **Features**
 
 - pass the layout (`config`) via props
@@ -86,4 +88,4 @@ In this example, `svelte:component` is used to select a specific component for e
 </style>
 ```
 
-You can also run this repo as an app; the example code is in [index.svelte](src/routes/index.svelte) and [\_Test.svelte](src/routes/_Test.svelte), and demonstates both features and shortcomings of the library.
+You can also run this repo as an app ([live demo](https://sillyfreak.github.io/svelte-golden-layout/)); the example code is in [index.svelte](src/routes/index.svelte) and [\_Test.svelte](src/routes/_Test.svelte), and demonstates both features and shortcomings of the library.
