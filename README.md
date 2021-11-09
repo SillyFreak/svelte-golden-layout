@@ -18,11 +18,16 @@ This was extracted from a personal project, so its initial scope was rather limi
 - dragging the tabset dividers results in text selection
 - base and theme CSS is bundled, but image assets have to be added as static resources (see [static/img](static/img), in this repo for the example app)
 
-This means that right now, the `config` prop should better not be changed after the fact. It's a starting point!
-
 ## Installation & development
 
-An **npm package** does not exist yet. If reception is good, I will publish this and develop it further.
+This library can be installed from NPM:
+
+```sh
+# from NPM
+npm i svelte-golden-layout
+```
+
+For development, clone the repo and add the dependency as shown:
 
 ```sh
 # clone this repo and package the library
