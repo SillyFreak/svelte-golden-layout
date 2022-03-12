@@ -70,6 +70,7 @@
 
 		container.virtualRectingRequiredEvent = handleContainerVirtualRectingRequiredEvent;
 		container.virtualVisibilityChangeRequiredEvent = handleContainerVisibilityChangeRequiredEvent;
+		container.virtualZIndexChangeRequiredEvent = handleContainerVirtualZIndexChangeRequiredEvent;
 
 		return {
 			component: undefined,
