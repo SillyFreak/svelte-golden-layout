@@ -45,7 +45,7 @@
 .lm_header .lm_tab .lm_close_tab {
 	width: 11px;
 	height: 11px;
-	background-image: url('../../img/lm_close_black.png');
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAKUlEQVR4nGNgYGD4z4Af/Mdg4FKASwCnDf8JKSBoAtEmEXQTQd8RDCcA6+4Q8OvIgasAAAAASUVORK5CYII=);
 	background-position: center center;
 	background-repeat: no-repeat;
 	top: 4px;
@@ -93,16 +93,16 @@
 	opacity: 1;
 }
 .lm_controls .lm_popout {
-	background-image: url('../../img/lm_popout_black.png');
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAANUlEQVR4nI2QMQoAMAwCz5L/f9mOzZIaN0E9UDyZhaaQz6atgBHgambEJ5wBKoS0WaIvfT+6K2MIECN19MAAAAAASUVORK5CYII=);
 }
 .lm_controls .lm_maximise {
-	background-image: url('../../img/lm_maximise_black.png');
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAIklEQVR4nGNkYGD4z0AAMBFSAAOETPpPlEmDUREjAxHhBABPvAQLFv3qngAAAABJRU5ErkJggg==);
 }
 .lm_controls .lm_close {
-	background-image: url('../../img/lm_close_black.png');
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAKUlEQVR4nGNgYGD4z4Af/Mdg4FKASwCnDf8JKSBoAtEmEXQTQd8RDCcA6+4Q8OvIgasAAAAASUVORK5CYII=);
 }
 .lm_controls .lm_dock {
-	background-image: url('../../img/lm_docked_black.png');
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAC6SURBVHjavNRRFYIwFAbgLwJRaCBRaCIRbGAEaSARaKANpMF8GedM3BSV4wMvY/u4+++GEIItns8m0/wMoUHA8WsIFS7oMOawtVCPPkGfsFeLa+ywx4RqUeEDVgIuMY8R11zIcZthfpfLYsKQVpCZc1p+oFTRhLbQuVvMrHqbUQmLVXQftT/JoE3GhtKhLCFtRLq5sphNQL0KSpB2sc0zrquuyBLJZFa/hUpI2vZVtx+HErL5b+Qv0H0Axmb86JFNd6MAAAAASUVORK5CYII=);
 	transform: rotate(-45deg);
 	transition: transform 300ms;
 }
@@ -118,7 +118,7 @@
 	background-color: #ffffff;
 }
 .lm_maximised .lm_controls .lm_maximise {
-	background-image: url('../../img/lm_minimize_black.png');
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAJklEQVR4nGP8//8/AyHARFDFUFbEwsDAwMDIyIgzHP7//89IlEkApSkHEScJTKoAAAAASUVORK5CYII=);
 }
 .lm_transition_indicator {
 	background-color: #000000;
@@ -132,7 +132,7 @@
 	opacity: 0.7;
 }
 .lm_popin .lm_icon {
-	background-image: url('../../img/lm_popin_black.png');
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAJCAYAAADpeqZqAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5AIMBA8Y4uozqQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAAQ0lEQVQY072OMQ6AMAzEzhH//7I7oKKKoSULXjI5Z5KokgXAbEANoMq8WwGs3FOcvq/Ul5w311zqSNVdefJ+kUjSzhteChsRI/jXegAAAABJRU5ErkJggg==);
 	background-position: center center;
 	background-repeat: no-repeat;
 	opacity: 0.7;
