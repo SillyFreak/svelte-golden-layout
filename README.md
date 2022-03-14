@@ -43,7 +43,9 @@ npm i golden-layout ../svelte-golden-layout/package
 
 ## simple example
 
-In this example, `svelte:component` is used to select a specific component for each tab, and the `componentState` object is passed as props to that component:
+You can run this repo as an app ([live demo](https://sillyfreak.github.io/svelte-golden-layout/)); the example code is in [index.svelte](src/routes/index.svelte) and [\_Test.svelte](src/routes/_Test.svelte), and demonstates both features and shortcomings of the library.
+
+In the less complete example below, `svelte:component` is used to select a specific component for each tab, and the `componentState` object is passed as props to that component:
 
 ```svelte
 <script lang="ts">
@@ -92,5 +94,3 @@ In this example, `svelte:component` is used to select a specific component for e
   }
 </style>
 ```
-
-You can also run this repo as an app ([live demo](https://sillyfreak.github.io/svelte-golden-layout/)); the example code is in [index.svelte](src/routes/index.svelte) and [\_Test.svelte](src/routes/_Test.svelte), and demonstates both features and shortcomings of the library.
