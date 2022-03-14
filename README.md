@@ -17,7 +17,6 @@ This was extracted from a personal project, so its initial scope was rather limi
 - changing the layout recreates the whole thing, i.e. new components are created for each tab
 - maximising tabs does not work yet (#2)
 - dragging the tabset dividers results in text selection
-- base and theme CSS is bundled, but image assets have to be added as static resources (see [static/img](static/img), in this repo for the example app)
 
 ## Installation & development
 
