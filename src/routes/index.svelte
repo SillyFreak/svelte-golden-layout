@@ -57,7 +57,7 @@
 	}
 </script>
 
-<main>
+<main class:popout={goldenLayout?.isSubWindow}>
 	<div>
 		<h1>Config</h1>
 		<p>
@@ -103,9 +103,22 @@
 		width: 3.5em;
 	}
 
-	.layout-container {
+	main:not(.popout) .layout-container {
 		height: 600px;
 
 		border: 1px solid black;
+	}
+
+	/* popout styling */
+
+	main.popout {
+		visibility: hidden;
+	}
+
+	main.popout .layout-container {
+		visibility: visible;
+
+		position: fixed;
+		inset: 0;
 	}
 </style>

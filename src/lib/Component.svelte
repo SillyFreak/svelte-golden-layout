@@ -142,10 +142,16 @@
 	function initRoot(root: HTMLDivElement) {
 		const components = new Map<ComponentContainer, SvelteComponent>();
 
+		goldenLayoutBoundingClientRect = root.getBoundingClientRect();
+
 		goldenLayout = new VirtualLayout(root, handleBindComponentEvent, handleUnbindComponentEvent);
 		goldenLayout.beforeVirtualRectingEvent = (count: number) => {
 			goldenLayoutBoundingClientRect = root.getBoundingClientRect();
 		};
+
+		if (goldenLayout.isSubWindow) {
+			goldenLayout.checkAddDefaultPopinButton();
+		}
 
 		return {
 			destroy() {
@@ -159,7 +165,10 @@
 		if (config) {
 			// TODO goldenLayout is now reloaded whenever the config changes,
 			// not only when the component is first loaded.
-			goldenLayout?.loadLayout(config);
+			// in case of a popout (subwindow), we don't want to load a layout
+			if (!goldenLayout?.isSubWindow) {
+				goldenLayout?.loadLayout(config);
+			}
 		}
 	}
 
