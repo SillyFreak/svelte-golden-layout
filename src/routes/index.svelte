@@ -41,7 +41,7 @@
 					componentType: 'Test',
 					componentState: {
 						name,
-						file: propertyStore(files, name),
+						// file: propertyStore(files, name),
 					},
 				};
 			}),
