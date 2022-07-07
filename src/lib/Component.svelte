@@ -1,3 +1,11 @@
+<script lang="ts" context="module">
+	export function isSubWindow(): boolean {
+		if (typeof document === 'undefined') return false;
+		// adapted from golden-layout/src/ts/virtual-layout.ts - hopefully this gets exposed
+		const windowConfigKey = new URL(document.location.href).searchParams.get('gl-window');
+		return windowConfigKey !== null;
+	}
+</script>
 <script lang="ts">
 	import type { SvelteComponent } from 'svelte';
 
