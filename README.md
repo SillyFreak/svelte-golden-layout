@@ -65,8 +65,8 @@ In the less complete example below, `svelte:component` is used to select a speci
           type: 'component',
           componentType: 'Test',
           componentState: {
-            someProp = 1,
-            anotherProp = 1,
+            someProp: 1,
+            anotherProp: 1,
           }
         },
         {
