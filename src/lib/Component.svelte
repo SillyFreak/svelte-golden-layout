@@ -32,6 +32,7 @@
 
 	export let config: LayoutConfig;
 	export let goldenLayout: VirtualLayout = undefined;
+	export let defaultPopinButton: boolean = false;
 
 	let goldenLayoutBoundingClientRect: DOMRect | undefined;
 	let components: ComponentConfig[] = [];
@@ -157,7 +158,7 @@
 			goldenLayoutBoundingClientRect = root.getBoundingClientRect();
 		};
 
-		if (goldenLayout.isSubWindow) {
+		if (defaultPopinButton && goldenLayout.isSubWindow) {
 			goldenLayout.checkAddDefaultPopinButton();
 		}
 

@@ -90,7 +90,7 @@
 	</main>
 {:else}
 	<div class="layout-popout">
-		<GoldenLayout config={layout} bind:goldenLayout let:componentType let:componentState>
+		<GoldenLayout config={layout} bind:goldenLayout let:componentType let:componentState defaultPopinButton>
 			<svelte:component this={components[componentType]} {...componentState} />
 		</GoldenLayout>
 	</div>
