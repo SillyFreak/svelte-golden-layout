@@ -1,12 +1,14 @@
 <script lang="ts">
-	import { writable, Writable } from 'svelte/store';
+	import type { ComponentType } from 'svelte';
+	import type { Writable } from 'svelte/store';
+	import { writable } from 'svelte/store';
 	import { propertyStore } from 'svelte-writable-derived';
 
-	import type { LayoutConfig, ResolvedLayoutConfig, VirtualLayout } from 'golden-layout';
+	import type { JsonValue, LayoutConfig, ResolvedLayoutConfig, VirtualLayout } from 'golden-layout';
 	import '../lib/css/themes/goldenlayout-light-theme.css';
 
 	import GoldenLayout from '../lib';
-	import Test from './_Test.svelte';
+	import Test from './Test.svelte';
 
 	const names = ['foo', 'bar', 'baz'];
 	const files = writable<{ [name: string]: string }>({
@@ -22,10 +24,10 @@
 	let display = true;
 	let rows = 4;
 
-	const components = { Test };
+	const components: Record<string, ComponentType> = { Test };
 
 	let layout: LayoutConfig;
-	let saved: ResolvedLayoutConfig = undefined;
+	let saved: ResolvedLayoutConfig | void = undefined;
 
 	let goldenLayout: VirtualLayout;
 
@@ -55,6 +57,12 @@
 	function handleRestore() {
 		layout = saved as unknown as LayoutConfig;
 	}
+
+	// work around limitation that there's No TS in markup
+	// see https://svelte.dev/docs/typescript#limitations
+	function castComponentState(componentState: JsonValue | undefined): object | undefined {
+		return componentState as object | undefined;
+	}
 </script>
 
 <main>
@@ -81,7 +89,10 @@
 		<div class="layout-container">
 			{#if display}
 				<GoldenLayout config={layout} bind:goldenLayout let:componentType let:componentState>
-					<svelte:component this={components[componentType]} {...componentState} />
+					<svelte:component
+						this={components[componentType]}
+						{...castComponentState(componentState)}
+					/>
 				</GoldenLayout>
 			{/if}
 		</div>
