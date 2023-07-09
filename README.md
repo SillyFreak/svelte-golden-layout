@@ -43,54 +43,53 @@ npm i golden-layout ../svelte-golden-layout/package
 
 ## simple example
 
-You can run this repo as an app ([live demo](https://sillyfreak.github.io/svelte-golden-layout/)); the example code is in [index.svelte](src/routes/index.svelte) and [\_Test.svelte](src/routes/_Test.svelte), and demonstates both features and shortcomings of the library.
+You can run this repo as an app ([live demo](https://sillyfreak.github.io/svelte-golden-layout/)); the example code is in [index.svelte](src/routes/index.svelte) and [Test.svelte](src/routes/Test.svelte), and demonstates both features and shortcomings of the library.
 
 In the less complete example below, `svelte:component` is used to select a specific component for each tab, and the `componentState` object is passed as props to that component:
 
 ```svelte
 <script lang="ts">
-  import type { LayoutConfig } from 'golden-layout';
-  import 'svelte-golden-layout/css/themes/goldenlayout-light-theme.css';
+	import 'svelte-golden-layout/css/themes/goldenlayout-light-theme.css';
 
-  import GoldenLayout from 'svelte-golden-layout';
-  // ... import a Test component
+	import GoldenLayout from 'svelte-golden-layout';
+	// ... import a Test component
 
-  const components = { Test };
+	const components = { Test };
 
-  const layout: LayoutConfig = {
-    root: {
-      type: 'row',
-      content: [
-        {
-          type: 'component',
-          componentType: 'Test',
-          componentState: {
-            someProp: 1,
-            anotherProp: 1,
-          }
-        },
-        {
-          type: 'component',
-          componentType: 'Test',
-        },
-      ],
-    },
-  };
+	const layout = {
+		root: {
+			type: 'row',
+			content: [
+				{
+					type: 'component',
+					componentType: 'Test',
+					componentState: {
+						someProp: 1,
+						anotherProp: 1,
+					},
+				},
+				{
+					type: 'component',
+					componentType: 'Test',
+				},
+			],
+		},
+	};
 </script>
 
 <div class="layout-container">
-  <GoldenLayout config={layout} let:componentType let:componentState>
-    <svelte:component this={components[componentType]} {...componentState} />
-  </GoldenLayout>
+	<GoldenLayout config={layout} let:componentType let:componentState>
+		<svelte:component this={components[componentType]} {...componentState} />
+	</GoldenLayout>
 </div>
 
 <style>
-  .layout-container {
-    width: 800px;
-    height: 600px;
+	.layout-container {
+		width: 800px;
+		height: 600px;
 
-    margin: 150px auto;
-    border: 1px solid black;
-  }
+		margin: 150px auto;
+		border: 1px solid black;
+	}
 </style>
 ```
