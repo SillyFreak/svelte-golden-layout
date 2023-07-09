@@ -4,7 +4,8 @@
 	import { writable } from 'svelte/store';
 	import { propertyStore } from 'svelte-writable-derived';
 
-	import type { JsonValue, LayoutConfig, ResolvedLayoutConfig, VirtualLayout } from 'golden-layout';
+	import type { JsonValue, ResolvedLayoutConfig, VirtualLayout } from 'golden-layout';
+	import { LayoutConfig } from 'golden-layout';
 	import '../lib/css/themes/goldenlayout-light-theme.css';
 
 	import GoldenLayout from '../lib';
@@ -55,7 +56,7 @@
 	}
 
 	function handleRestore() {
-		layout = saved as unknown as LayoutConfig;
+		layout = LayoutConfig.fromResolved(saved!);
 	}
 
 	// work around limitation that there's No TS in markup
