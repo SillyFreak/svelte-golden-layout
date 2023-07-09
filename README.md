@@ -49,47 +49,47 @@ In the less complete example below, `svelte:component` is used to select a speci
 
 ```svelte
 <script lang="ts">
-  import 'svelte-golden-layout/css/themes/goldenlayout-light-theme.css';
+	import 'svelte-golden-layout/css/themes/goldenlayout-light-theme.css';
 
-  import GoldenLayout from 'svelte-golden-layout';
-  // ... import a Test component
+	import GoldenLayout from 'svelte-golden-layout';
+	// ... import a Test component
 
-  const components = { Test };
+	const components = { Test };
 
-  const layout = {
-    root: {
-      type: 'row',
-      content: [
-        {
-          type: 'component',
-          componentType: 'Test',
-          componentState: {
-            someProp: 1,
-            anotherProp: 1,
-          }
-        },
-        {
-          type: 'component',
-          componentType: 'Test',
-        },
-      ],
-    },
-  };
+	const layout = {
+		root: {
+			type: 'row',
+			content: [
+				{
+					type: 'component',
+					componentType: 'Test',
+					componentState: {
+						someProp: 1,
+						anotherProp: 1,
+					},
+				},
+				{
+					type: 'component',
+					componentType: 'Test',
+				},
+			],
+		},
+	};
 </script>
 
 <div class="layout-container">
-  <GoldenLayout config={layout} let:componentType let:componentState>
-    <svelte:component this={components[componentType]} {...componentState} />
-  </GoldenLayout>
+	<GoldenLayout config={layout} let:componentType let:componentState>
+		<svelte:component this={components[componentType]} {...componentState} />
+	</GoldenLayout>
 </div>
 
 <style>
-  .layout-container {
-    width: 800px;
-    height: 600px;
+	.layout-container {
+		width: 800px;
+		height: 600px;
 
-    margin: 150px auto;
-    border: 1px solid black;
-  }
+		margin: 150px auto;
+		border: 1px solid black;
+	}
 </style>
 ```
