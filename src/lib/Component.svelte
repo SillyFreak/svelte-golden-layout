@@ -6,6 +6,7 @@
 		return windowConfigKey !== null;
 	}
 </script>
+
 <script lang="ts">
 	import type { SvelteComponent } from 'svelte';
 
